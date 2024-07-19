@@ -1,0 +1,70 @@
+/* CODE FOR SIMPLE QUIZ GAME */
+#include<iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+ struct Question 
+ {
+    string Text;
+    vector<string> ans;
+    int Option;
+ };
+
+ void askQuestion(const Question& question, int& score) 
+ {
+    cout << question.Text << endl;
+    for (int i = 0; i < question.ans.size(); ++i)
+     {
+        cout << i + 1 << ". " << question.ans[i] << endl;
+     }
+
+    int user;
+    cout << "Your answer: ";
+    cin >> user;
+
+    if (user - 1 == question.Option)
+     {
+        cout << "Correct!" << endl;
+        ++score;
+     }
+     else
+        cout << "Wrong! The correct answer was: " << question.ans[question.Option] << endl;
+
+    cout << endl;
+ }
+
+int main()
+ {
+    vector<Question> questions = {
+        {
+            "What is the capital of Australia?",
+            {"Adelaide", "Canberra", "Melbourne", "sydney"},
+            1
+        },
+        {
+            "Who is the god of cricket ?",
+            {"MS Dhoni", "Sachin Tendulkar", "Babar Aazam", "Rohit sharma"},
+            1
+        },
+        {
+            "Who wrote 'Bhagavad Gita'?",
+            {"Valmiki", "Tulsi Das", "Veda Vyasa", "Ramchandra"},
+            2
+        }
+    };
+
+    int score = 0;
+
+    cout << "\nWelcome to the Quiz Game!" << endl << endl;
+
+    for (const auto& question : questions)
+     {
+        askQuestion(question, score);
+     }
+
+    cout << "Your final score is: " << score << " out of " << questions.size() << endl;
+
+    return 0;
+}
